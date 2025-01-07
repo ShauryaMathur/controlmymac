@@ -24,17 +24,17 @@
    git clone https://github.com/ShauryaMathur/controlmymac.git
    cd controlmymac
    ```
-2. **Set Up a Virtual Environment(Optional but Recommended):
+2. **Set Up a Virtual Environment(Optional but Recommended)**:
    ```bash
    python -m venv venv
    source venv/bin/activate  # macOS/Linux
    .\venv\Scripts\activate   # Windows
    ```
-3. Install Dependencies
+3. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
-4. Run the app
+4. **Run the app**
    ```bash
    python controlmymac.py
    ```
