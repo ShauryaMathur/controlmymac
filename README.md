@@ -39,7 +39,7 @@
    python controlmymac.py
    ```
 
-Notes 📝
-	•	This application uses YAMNet and Librosa for sound detection.
-	•	Gesture recognition is powered by OpenCV and Mediapipe.
-	•	Ensure your system’s microphone and camera are functioning properly for optimal performance.
+## Notes 📝
+- This application uses **YAMNet** and **Librosa** for sound detection.
+- Gesture recognition is powered by **OpenCV** and **Mediapipe**.
+- Ensure your system’s microphone and camera are functioning properly for optimal performance.
