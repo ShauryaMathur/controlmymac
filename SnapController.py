@@ -110,33 +110,37 @@ class AdvancedSnapDetector:
             infered_class = self.class_names[scores_np.mean(axis=0).argmax()]
             print(f'The main sound is: {infered_class}')
 
-            plt.figure(figsize=(10, 6))
+            try:
+                plt.figure(figsize=(10, 6))
 
-            # Plot the waveform.
-            plt.subplot(3, 1, 1)
-            plt.plot(audio_data)
-            plt.xlim([0, len(audio_data)])
+                # Plot the waveform.
+                plt.subplot(3, 1, 1)
+                plt.plot(audio_data)
+                plt.xlim([0, len(audio_data)])
 
-            # Plot the log-mel spectrogram (returned by the model).
-            plt.subplot(3, 1, 2)
-            plt.imshow(spectrogram_np.T, aspect='auto', interpolation='nearest', origin='lower')
+                # Plot the log-mel spectrogram (returned by the model).
+                plt.subplot(3, 1, 2)
+                plt.imshow(spectrogram_np.T, aspect='auto', interpolation='nearest', origin='lower')
 
-            # Plot and label the model output scores for the top-scoring classes.
-            mean_scores = np.mean(scores, axis=0)
-            top_n = 10
-            top_class_indices = np.argsort(mean_scores)[::-1][:top_n]
-            plt.subplot(3, 1, 3)
-            plt.imshow(scores_np[:, top_class_indices].T, aspect='auto', interpolation='nearest', cmap='gray_r')
+                # Plot and label the model output scores for the top-scoring classes.
+                mean_scores = np.mean(scores, axis=0)
+                top_n = 10
+                top_class_indices = np.argsort(mean_scores)[::-1][:top_n]
+                plt.subplot(3, 1, 3)
+                plt.imshow(scores_np[:, top_class_indices].T, aspect='auto', interpolation='nearest', cmap='gray_r')
 
-            # patch_padding = (PATCH_WINDOW_SECONDS / 2) / PATCH_HOP_SECONDS
-            # values from the model documentation
-            patch_padding = (0.025 / 2) / 0.01
-            plt.xlim([-patch_padding - 0.5, scores.shape[0] + patch_padding - 0.5])
-            # Label the top_N classes.
-            yticks = range(0, top_n, 1)
-            plt.yticks(yticks, [self.class_names[top_class_indices[x]] for x in yticks])
-            _ = plt.ylim(-0.5 + np.array([top_n, 0]))
-            plt.show()
+                # patch_padding = (PATCH_WINDOW_SECONDS / 2) / PATCH_HOP_SECONDS
+                # values from the model documentation
+                patch_padding = (0.025 / 2) / 0.01
+                plt.xlim([-patch_padding - 0.5, scores.shape[0] + patch_padding - 0.5])
+                # Label the top_N classes.
+                yticks = range(0, top_n, 1)
+                plt.yticks(yticks, [self.class_names[top_class_indices[x]] for x in yticks])
+                _ = plt.ylim(-0.5 + np.array([top_n, 0]))
+                plt.show()
+            except:
+                print('There is some issue plotting the waveforms')
+
             return True if infered_class == 'Tick' else False
 
         except Exception as e:
